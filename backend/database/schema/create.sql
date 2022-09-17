@@ -1,16 +1,14 @@
 DROP TABLE IF EXISTS listings CASCADE;
 DROP TABLE IF EXISTS unwanted CASCADE;
+DROP TABLE IF EXISTS images CASCADE;
 
 CREATE TABLE listings (
   id SERIAL PRIMARY KEY NOT NULL,
-  listing_id INTEGER NOT NULL,
+  craigslist_id BIGINT NOT NULL,
   link TEXT NOT NULL,
   title TEXT NOT NULL,
   description TEXT,
   condition TEXT,
-  make TEXT,
-  model TEXT,
-  size TEXT,
   price INTEGER NOT NULL,
   date TEXT NOT NULL,
   location TEXT NOT NULL
@@ -20,5 +18,11 @@ CREATE TABLE unwanted (
   id SERIAL PRIMARY KEY NOT NULL,
   category TEXT NOT NULL,
   value TEXT NOT NULL
+);
+
+CREATE TABLE images (
+  id SERIAL PRIMARY KEY NOT NULL,
+  listing_id INTEGER REFERENCES listings(id) ON DELETE CASCADE,
+  url TEXT NOT NULL
 );
 
