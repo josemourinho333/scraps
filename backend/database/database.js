@@ -12,18 +12,18 @@ if (process.env.DATABASE_URL) {
   }
 } else {
   config = {
-    host: process.env.POSTGRES_HOST,
-    port: process.env.POSTGRES_PORT,
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    databse: process.env.POSTGRES_DB
+    host: process.env.PGHOST,
+    user: process.env.PGUSER,
+    databse: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
   }
 };
 
 const db = new Pool(config);
 
 db.connect(() => {
-  console.log('connected to database!');
+  console.log(`connected to database!`);
 });
 
 module.exports = db;
