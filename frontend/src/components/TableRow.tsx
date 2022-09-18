@@ -58,7 +58,7 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
         {priceAnalysis ? priceAnalysis : 'N/A'}
       </td>
       <td className="link">
-        <a href={`http://${link}`} target="_blank" rel="noopener noreferrer">Link</a>
+        <a href={link} target="_blank" rel="noopener noreferrer">Link</a>
       </td>
       <td className="delete">
         <button>
