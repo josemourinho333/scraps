@@ -29,18 +29,18 @@ const Table = ({listings}: Props) => {
   })
 
   return (
-    <div className='table-container'>
+    <div className='table-container shadow-lg'>
       <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          <thead>
+        <table className="table m-auto">
+          <thead className='bg-primary'>
             <TableColumns />
           </thead>
           <tbody>
             {rows}
           </tbody>
-          <tfoot>
+          {/* <tfoot>
             <TableColumns />
-          </tfoot>
+          </tfoot> */}
         </table>
       </div>
     </div>
