@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 type Props = {
   id: number,
@@ -24,9 +25,9 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
 
   return (
     <tr id={`${craigslistId}`}>
-      <td className='select'>
-        <label>
-          <input type="checkbox" className="checkbox" value={id}/>
+      <td>
+        <label className='label cursor-pointer'>
+          <input type="checkbox" className="checkbox checkbox-primary" />
         </label>
       </td>
       <td className='img'>
@@ -58,12 +59,12 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
         {priceAnalysis ? priceAnalysis : 'N/A'}
       </td>
       <td className="link">
-        <a href={link} target="_blank" rel="noopener noreferrer">Link</a>
+        <a href={link} target="_blank" rel="noopener noreferrer"><LinkIcon className='h-6 w-6 text-primary'/></a>
       </td>
       <td className="delete">
-        <button>
-          X
-        </button>
+      <button className="btn btn-outline btn-primary btn-square group">
+        <TrashIcon className='h-6 w-6 text-primary group-hover:text-primary-content' />
+      </button>
       </td>
     </tr>
   )

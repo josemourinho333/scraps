@@ -2,6 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Table from './components/Table';
 import axios from 'axios';
+import Nav from './components/Nav';
+import Stats from './components/Stats';
 
 export type Listings = {
   id: number,
@@ -29,7 +31,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App bg-base-500 flex flex-col items-center">
+      <Nav />
+      <Stats />
       <Table listings={listings}/>
     </div>
   );
