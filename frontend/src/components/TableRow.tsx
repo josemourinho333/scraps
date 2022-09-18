@@ -1,44 +1,20 @@
 import React from 'react';
 
 type Props = {
-};
-
-type Listing = {
   id: number,
+  craigslistId: number,
   images: string[],
   date: string,
-  price: number,
+  price: number, 
   title: string,
-  desc: string,
+  desc: string, 
   condition: string,
-  location: string,
-  link: string,
-  priceAnalysis?: string
-}
+  location: string, 
+  link: string, 
+  priceAnalysis?: string 
+};
 
-// need the data passed down to here
-
-const sample: Listing = {
-  id: 123,
-  images: [
-    'https://images.craigslist.org/01616_3ptq9NgELdvz_0CI0pO_300x300.jpg',
-    'https://images.craigslist.org/00A0A_fnmVgYtrF0gz_0CI0pO_300x300.jpg',
-    'https://images.craigslist.org/00505_1YDjf9DocCyz_0CI0pO_300x300.jpg',
-    'https://images.craigslist.org/01313_58Txin2RW6Tz_0CI0pO_300x300.jpg'
-  ],
-  date: '2022-09-17 13:36',
-  price: 123,
-  title: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur, minus.',
-  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus animi soluta, reprehenderit nemo fugiat nihil autem ab pariatur eaque unde sed assumenda modi nisi, reiciendis earum illum. Incidunt sunt et tempore omnis. Quasi nemo dolorem officia ipsa laborum deleniti odio?',
-  condition: 'Good',
-  location: 'Vancouver',
-  link: 'www.google.ca',
-  priceAnalysis: 'Good Price'
-}
-
-const TableRow = (props: Props) => {
-
-  const { id, images, date, price, title, desc, condition, location, link, priceAnalysis } = sample; 
+const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, priceAnalysis}: Props) => {
 
   const formatDate = (date: string) => {
     const calendarDate = date.split(' ')[0];
@@ -47,7 +23,7 @@ const TableRow = (props: Props) => {
   };
 
   return (
-    <tr>
+    <tr id={`${craigslistId}`}>
       <td className='select'>
         <label>
           <input type="checkbox" className="checkbox" value={id}/>

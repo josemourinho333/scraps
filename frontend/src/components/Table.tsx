@@ -1,10 +1,33 @@
 import React from 'react';
 import TableRow from './TableRow';
 import TableColumns from './TableColumns';
+import { Listings } from '../App';
 
-type Props = {};
+type Props = {
+  listings: Listings[];
+};
 
-const Table = (props: Props) => {
+const Table = ({listings}: Props) => {
+  // map over listings and generate tablerow
+  const rows = listings.map((listing) => {
+    return (
+      <TableRow 
+        key={listing.id}
+        id={listing.id}
+        craigslistId={listing.craigslistId}
+        images={listing.images}
+        date={listing.date}
+        price={listing.price}
+        title={listing.title}
+        desc={listing.desc}
+        condition={listing.condition}
+        location={listing.location}
+        link={listing.link}
+        priceAnalysis={listing.priceAnalysis}
+      />
+    )
+  })
+
   return (
     <div className='table-container'>
       <div className="overflow-x-auto w-full">
@@ -13,7 +36,7 @@ const Table = (props: Props) => {
             <TableColumns />
           </thead>
           <tbody>
-            <TableRow />
+            {rows}
           </tbody>
           <tfoot>
             <TableColumns />

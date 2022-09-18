@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import Table from './components/Table';
 import axios from 'axios';
 
-type Listing = {
+export type Listings = {
   id: number,
+  craigslistId: number,
   images: string[],
   date: string,
   price: number,
@@ -16,8 +17,8 @@ type Listing = {
   priceAnalysis?: string
 };
 
-function App() {
-  const [listings, setListings] = useState<Listing[]>([]);
+const App = () => {
+  const [listings, setListings] = useState<Listings[]>([]);
 
   useEffect(() => {
     axios.get("/api/listings")
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <Table />
+      <Table listings={listings}/>
     </div>
   );
 }
