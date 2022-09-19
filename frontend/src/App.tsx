@@ -30,6 +30,15 @@ const App = () => {
       .catch((err) => console.log('fetching listings err', err));
   }, []);
 
+  // gettin the median value calculated
+  // useEffect(() => {
+  //   const totalListings = listings.length;
+  //   if (totalListings) {
+  //     totalListings % 2 === 0
+  //       ? totalListings
+  //   }
+  // }, [listings.length])
+
   return (
     <div className="App bg-base-500 flex flex-col items-center">
       <Nav />
