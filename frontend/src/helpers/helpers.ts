@@ -13,3 +13,14 @@ export const formatDate = (date: string) => {
   const time = date.split(' ')[1];
   return [calendarDate, time];
 };
+
+export const getMedian = (set: number[]): number => {
+  if (!set.length) {
+    return 0;
+  };
+
+  const sorted = [...set].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0 ?
+      ((sorted[middle - 1] + sorted[middle]) / 2) : sorted[middle];
+};

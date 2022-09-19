@@ -1,8 +1,6 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
-type Props = {}
-
-const Nav = (props: Props) => {
+const Nav = () => {
   return (
     <div className="navbar bg-primary text-primary-content">
       <div className="navbar-start">
@@ -11,14 +9,14 @@ const Nav = (props: Props) => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 text-neutral rounded-box w-52">
-            <li><a>Add new</a></li>
-            <li><a>Notifications</a></li>
-            <li><a>Log out</a></li>
+            <li><Link to="/new">Add new</Link></li>
+            <li><Link to="/logs">Notifications</Link></li>
+            <li><Link to="/logout">Log out</Link></li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a href='/' className="btn btn-ghost normal-case text-xl">Scraper</a>
+        <Link to="/" className="btn btn-ghost normal-case text-xl">Scraper</Link>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">

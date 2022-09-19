@@ -1,9 +1,13 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Table from './components/Table';
 import axios from 'axios';
 import Nav from './components/Nav';
 import Stats from './components/Stats';
+
+// helpers
+import { getMedian } from './helpers/helpers';
 
 export type Listings = {
   id: number,
@@ -19,6 +23,12 @@ export type Listings = {
   priceAnalysis?: string
 };
 
+export type Data = {
+  median: number,
+  total: number,
+  // numOfGoodDeals: number
+};
+
 const App = () => {
   const [listings, setListings] = useState<Listings[]>([]);
 
@@ -30,6 +40,15 @@ const App = () => {
       .catch((err) => console.log('fetching listings err', err));
   }, []);
 
+  const listingsData: Data = useMemo(() => {
+    const prices = listings.map((listing) => {
+      return listing.price;
+    });
+    const median = getMedian(prices);
+    const total = listings.length;
+    return { median, total };
+  }, [listings.length]);
+
   // gettin the median value calculated
   // useEffect(() => {
   //   const totalListings = listings.length;
@@ -40,11 +59,29 @@ const App = () => {
   // }, [listings.length])
 
   return (
-    <div className="App bg-base-500 flex flex-col items-center">
+    <BrowserRouter>
       <Nav />
-      <Stats />
-      <Table listings={listings}/>
-    </div>
+      <div className="App bg-base-500 flex flex-col items-center">
+        <Routes>
+
+          <Route path="/" element={
+            <>
+              <Stats listingsData={listingsData} />
+              <Table listings={listings}/>
+            </>
+          }/>
+
+          <Route path="/new" element={
+            <>"Adding page"</>
+          } />
+
+          <Route path="/logs" element={
+            <>"Logs"</>
+          } />
+
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
