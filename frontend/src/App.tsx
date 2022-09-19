@@ -1,5 +1,11 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
 import Table from './components/Table';
 import axios from 'axios';
 import Nav from './components/Nav';
@@ -40,11 +46,29 @@ const App = () => {
   // }, [listings.length])
 
   return (
-    <div className="App bg-base-500 flex flex-col items-center">
+    <BrowserRouter>
       <Nav />
-      <Stats />
-      <Table listings={listings}/>
-    </div>
+      <div className="App bg-base-500 flex flex-col items-center">
+        <Routes>
+
+          <Route path="/" element={
+            <>
+              <Stats />
+              <Table listings={listings}/>
+            </>
+          }/>
+
+          <Route path="/new" element={
+            <>"Adding page"</>
+          } />
+
+          <Route path="/logs" element={
+            <>"Logs"</>
+          } />
+          
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
