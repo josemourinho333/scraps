@@ -1,8 +1,4 @@
-import React from 'react';
-
-type Props = {}
-
-const TableColumns = (props: Props) => {
+const TableColumns = () => {
   return (
     <tr>
       <th className='bg-primary text-primary-content'>

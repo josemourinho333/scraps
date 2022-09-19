@@ -1,15 +1,13 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Table from './components/Table';
 import axios from 'axios';
 import Nav from './components/Nav';
 import Stats from './components/Stats';
+
+// helpers
+import { getMedian } from './helpers/helpers';
 
 export type Listings = {
   id: number,
@@ -25,6 +23,12 @@ export type Listings = {
   priceAnalysis?: string
 };
 
+export type Data = {
+  median: number,
+  total: number,
+  // numOfGoodDeals: number
+};
+
 const App = () => {
   const [listings, setListings] = useState<Listings[]>([]);
 
@@ -35,6 +39,15 @@ const App = () => {
       })
       .catch((err) => console.log('fetching listings err', err));
   }, []);
+
+  const listingsData: Data = useMemo(() => {
+    const prices = listings.map((listing) => {
+      return listing.price;
+    });
+    const median = getMedian(prices);
+    const total = listings.length;
+    return { median, total };
+  }, [listings.length]);
 
   // gettin the median value calculated
   // useEffect(() => {
@@ -53,7 +66,7 @@ const App = () => {
 
           <Route path="/" element={
             <>
-              <Stats />
+              <Stats listingsData={listingsData} />
               <Table listings={listings}/>
             </>
           }/>
@@ -65,7 +78,7 @@ const App = () => {
           <Route path="/logs" element={
             <>"Logs"</>
           } />
-          
+
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,9 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-type Props = {}
-
-const Nav = (props: Props) => {
+const Nav = () => {
   return (
     <div className="navbar bg-primary text-primary-content">
       <div className="navbar-start">
