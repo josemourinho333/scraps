@@ -6,6 +6,7 @@ const axios = require('axios');
 const cors = require('cors');
 const db = require('./database/database');
 const listingRoute = require('./routes/listings');
+const settingsRoute = require('./routes/settings');
 
 // port and express init
 const port = process.env.PORT || 8080;
@@ -18,6 +19,7 @@ app.use(bodyparser.json());
 
 // routes
 app.use('/api', listingRoute(db));
+app.use('/api', settingsRoute(db));
 
 axios.get(process.env.CRAIGSLIST_URL)
   .then((res) => {

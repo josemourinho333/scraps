@@ -10,6 +10,7 @@ const Nav = () => {
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 text-neutral rounded-box w-52">
             <li><Link to="/new">Add new</Link></li>
+            <li><Link to="/settings">Settings</Link></li>
             <li><Link to="/logs">Notifications</Link></li>
             <li><Link to="/logout">Log out</Link></li>
           </ul>

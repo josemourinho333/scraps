@@ -5,6 +5,7 @@ import Table from './components/Table';
 import axios from 'axios';
 import Nav from './components/Nav';
 import Stats from './components/Stats';
+import Settings from './components/Settings';
 
 // helpers
 import { getMedian } from './helpers/helpers';
@@ -26,7 +27,6 @@ export type Listings = {
 export type Data = {
   median: number,
   total: number,
-  // numOfGoodDeals: number
 };
 
 const App = () => {
@@ -49,15 +49,6 @@ const App = () => {
     return { median, total };
   }, [listings.length]);
 
-  // gettin the median value calculated
-  // useEffect(() => {
-  //   const totalListings = listings.length;
-  //   if (totalListings) {
-  //     totalListings % 2 === 0
-  //       ? totalListings
-  //   }
-  // }, [listings.length])
-
   return (
     <BrowserRouter>
       <Nav />
@@ -77,6 +68,10 @@ const App = () => {
 
           <Route path="/logs" element={
             <>"Logs"</>
+          } />
+
+          <Route path="/settings" element={
+            <Settings />
           } />
 
         </Routes>
