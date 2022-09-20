@@ -1,13 +1,14 @@
 import React from 'react';
 import TableRow from './TableRow';
 import TableColumns from './TableColumns';
-import { Listings } from '../App';
+import { Listings, Data } from '../App';
 
 type Props = {
-  listings: Listings[];
+  listings: Listings[],
+  listingsData: Data,
 };
 
-const Table = ({listings}: Props) => {
+const Table = ({listings, listingsData}: Props) => {
   // map over listings and generate tablerow
   const rows = listings.map((listing) => {
     return (
@@ -23,7 +24,7 @@ const Table = ({listings}: Props) => {
         condition={listing.condition}
         location={listing.location}
         link={listing.link}
-        priceAnalysis={listing.priceAnalysis}
+        median={listingsData.median}
       />
     )
   })

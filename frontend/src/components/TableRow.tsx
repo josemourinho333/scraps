@@ -1,5 +1,5 @@
 import { LinkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
-import { formatLocation, formatDate } from '../helpers/helpers';
+import { formatLocation, formatDate, analyzePrice } from '../helpers/helpers';
 
 type Props = {
   id: number,
@@ -12,10 +12,12 @@ type Props = {
   condition: string,
   location: string, 
   link: string, 
-  priceAnalysis?: string 
+  median: number | string,
 };
 
-const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, priceAnalysis}: Props) => {
+const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, median}: Props) => {
+
+  const analysisResult = analyzePrice(price, median);
 
   return (
     <tr id={`${craigslistId}`}>
@@ -47,7 +49,18 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
         <div className="max-w-max">{formatLocation(location)}</div>
       </td>
       <td className="price-analysis">
-        {priceAnalysis ? priceAnalysis : 'N/A'}
+        {analysisResult === 'Bad'
+          ? <div className="badge badge-error">Bad</div>
+          : analysisResult === 'Average'
+          ? <div className="badge badge-warning">Average</div>
+          : analysisResult === 'Okay'
+          ? <div className="badge badge-info">Okay</div>
+          : analysisResult === 'Good'
+          ? <div className="badge badge-success">Good</div>
+          : analysisResult === 'Great'
+          ? <div className="badge badge-accent">Great</div>
+          : 'N/A'
+        }
       </td>
       <td className="link">
         <a href={link} target="_blank" rel="noopener noreferrer"><LinkIcon className='h-4 w-4 text-primary'/></a>

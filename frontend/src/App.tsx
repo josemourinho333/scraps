@@ -21,11 +21,10 @@ export type Listings = {
   condition: string,
   location: string,
   link: string,
-  priceAnalysis?: string
 };
 
 export type Data = {
-  median: number,
+  median: number | string,
   total: number,
 };
 
@@ -44,9 +43,10 @@ const App = () => {
     const prices = listings.map((listing) => {
       return listing.price;
     });
-    const median = getMedian(prices);
+    const medianValue = getMedian(prices);
+    const finalMedian = Number(medianValue).toFixed(2);
     const total = listings.length;
-    return { median, total };
+    return { median: finalMedian, total };
   }, [listings.length]);
 
   return (
@@ -58,13 +58,13 @@ const App = () => {
           <Route path="/" element={
             <>
               <Stats listingsData={listingsData} />
-              <Table listings={listings}/>
+              <Table listings={listings} listingsData={listingsData}/>
             </>
           }/>
 
-          <Route path="/new" element={
+          {/* <Route path="/new" element={
             <>"Adding page"</>
-          } />
+          } /> */}
 
           <Route path="/logs" element={
             <>"Logs"</>
