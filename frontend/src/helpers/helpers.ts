@@ -14,6 +14,18 @@ export const formatDate = (date: string) => {
   return [calendarDate, time];
 };
 
+export const capitalizeWord = (word: string) => {
+  const newWord = word.split('').map((char, index) => {
+    if (index === 0) {
+      return char.toUpperCase();
+    }
+
+    return char;
+  }).join('');
+
+  return newWord;
+};
+
 export const getMedian = (set: number[]): number => {
   if (!set.length) {
     return 0;
