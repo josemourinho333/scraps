@@ -30,7 +30,7 @@ const Table = ({listings, listingsData}: Props) => {
   })
 
   return (
-    <div className='table-container shadow-lg'>
+    <div className='table-container shadow-lg mt-2 mb-5'>
       <div className="overflow-x-auto w-full">
         <table className="table m-auto">
           <thead className='bg-primary'>
