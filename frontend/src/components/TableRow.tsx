@@ -43,10 +43,10 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
         </div>
       </td>
       <td className='desc'>
-        {desc.substring(0, 40)}
+        {desc.substring(0, 60)}
       </td>
       <td className="location">
-        <div className="max-w-max">{formatLocation(location)}</div>
+        <div className="w-[100px]">{formatLocation(location).substring(0, 10)}...</div>
       </td>
       <td className="price-analysis">
         {analysisResult === 'Bad'

@@ -8,7 +8,7 @@ import Stats from './components/Stats';
 import Settings from './components/Settings';
 
 // helpers
-import { getMedian } from './helpers/helpers';
+import { formatDesc, getMedian } from './helpers/helpers';
 
 export type Listings = {
   id: number,
@@ -34,7 +34,17 @@ const App = () => {
   useEffect(() => {
     axios.get("/api/listings")
       .then((res) => {
-        setListings([...res.data]);
+        const data = [];
+        for (const item of res.data) {
+          const newDesc = formatDesc(item.desc);
+          const updatedItem = {
+            ...item,
+            desc: newDesc,
+          };
+
+          data.push(updatedItem);
+        };
+        setListings([...data]);
       })
       .catch((err) => console.log('fetching listings err', err));
   }, []);

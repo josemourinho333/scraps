@@ -16,7 +16,8 @@ module.exports = db => {
         link
       FROM listings
       JOIN images ON images.listing_id = listings.id
-      GROUP BY listings.id;
+      GROUP BY listings.id
+      ORDER BY date desc;
     `;
 
     return db.query(query)

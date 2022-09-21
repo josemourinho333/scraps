@@ -8,6 +8,26 @@ export const formatLocation = (location: string) => {
   return editLocation.join(' ');
 };
 
+export const formatDesc = (desc: string) => {
+  const newDesc = desc.slice(26).trim().split(' ').map((word: string) => {
+    if (word.includes('\n')) {
+      return word.replace(/[\r\n]/gm, '');
+    }
+
+    if (word.includes(',')) {
+      return word.replace(',', '');
+    }
+
+    if (word.includes(':')) {
+      return word.replace(':', '');
+    }
+
+    return word;
+  }).join(' ');
+
+  return newDesc;
+};
+
 export const formatDate = (date: string) => {
   const calendarDate = date.split(' ')[0];
   const time = date.split(' ')[1];
@@ -38,7 +58,6 @@ export const getMedian = (set: number[]): number => {
 };
 
 export const analyzePrice = (price: string | number | undefined, median: number | string) => {
-  console.log('price', price);
   if (price === undefined) return undefined;
 
   const settings: any = {
