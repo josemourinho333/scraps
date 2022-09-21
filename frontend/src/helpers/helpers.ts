@@ -73,30 +73,15 @@ export const getMedian = (set: number[]): number => {
 export const analyzePrice = (price: string | number | undefined, median: number | string) => {
   if (price === undefined) return undefined;
 
-  const settings: any = {
-    segment: [5, 10, 20, 30],
-  };
-
-  for (let i = 0; i < settings.segment.length; i++) {
-    const range = settings.segment[i];
-    const rangeTarget = Math.floor(median as number * (range / 100));
-    settings[range] = rangeTarget;
-  };
-
-  const great = (price as number - (median as number - settings[30])) * (price as number - (median as number)) <= 0;
-  const good = (price as number - (median as number - settings[20])) * (price as number - (median as number)) <= 0;
-  const okay = (price as number - (median as number - settings[10])) * (price as number - (median as number)) <= 0;
-  const avg = (price as number - (median as number - settings[5])) * (price as number - (median as number)) <= 0;
-
-  if (great && !good && !okay && !avg) {
-    return 'Great';
-  } else if (good && !great && !okay && !avg) {
-    return 'Good';
-  } else if (okay && !good && !avg && !great) {
-    return 'Okay';
-  } else if (avg && !good && !great && !okay) {
+  if (price <= median && price > (median as number - 100)) {
     return 'Average';
-  } else if (!avg && !okay && !good && !great) {
+  } else if (price <= (median as number - 100) && price > (median as number - 300)) {
+    return 'Good';
+  } else if (price <= (median as number - 300) && price > (median as number - 500)) {
+    return 'Great';
+  } else if (price <= (median as number - 500)) {
+    return 'Too low';
+  } else if (price >= median) {
     return 'Bad';
   }
 };

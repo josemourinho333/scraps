@@ -12,7 +12,7 @@ import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
 
 export type Listings = {
   id: number,
-  craigslistId: number,
+  craigslistid: number,
   images: string[],
   date: string,
   price: number,

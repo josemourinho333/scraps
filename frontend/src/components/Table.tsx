@@ -15,7 +15,7 @@ const Table = ({listings, listingsData}: Props) => {
       <TableRow 
         key={listing.id}
         id={listing.id}
-        craigslistId={listing.craigslistId}
+        craigslistId={listing.craigslistid}
         images={listing.images}
         date={listing.date}
         price={listing.price}

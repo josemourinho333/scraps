@@ -53,12 +53,12 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
           ? <div className="badge badge-error">Bad</div>
           : analysisResult === 'Average'
           ? <div className="badge badge-warning">Average</div>
-          : analysisResult === 'Okay'
-          ? <div className="badge badge-info">Okay</div>
           : analysisResult === 'Good'
           ? <div className="badge badge-success">Good</div>
           : analysisResult === 'Great'
-          ? <div className="badge badge-accent">Great</div>
+          ? <div className="badge badge-success">Great</div>
+          : analysisResult === 'Too low'
+          ? <div className="badge badge-neutral">Too low</div>
           : 'N/A'
         }
       </td>
