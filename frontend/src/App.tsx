@@ -8,7 +8,7 @@ import Stats from './components/Stats';
 import Settings from './components/Settings';
 
 // helpers
-import { formatDesc, getMedian } from './helpers/helpers';
+import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
 
 export type Listings = {
   id: number,
@@ -37,8 +37,10 @@ const App = () => {
         const data = [];
         for (const item of res.data) {
           const newDesc = formatDesc(item.desc);
+          const newTitle = formatTitle(item.title);
           const updatedItem = {
             ...item,
+            title: newTitle,
             desc: newDesc,
           };
 
