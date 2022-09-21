@@ -70,20 +70,19 @@ const App = () => {
     const finalMedian = Number(medianValue).toFixed(2);
     const total = listings.length;
     return { median: finalMedian, total };
-  }, [listings.length]);
+  }, [listings]);
 
   useEffect(() => {
     const end = pageSize * pageData.currentPage;
     const start = end - pageSize;
     const pageDataView = listings.slice(start, end);
     setCurrentPageData([...pageDataView]);
-  }, [pageData.currentPage])
+  }, [pageData.currentPage, listings])
 
   const updatePage = (newPage: number) => {
-    setPageData(prev => ({
-      ...prev,
-      currentPage: newPage,
-    }))
+    setPageData({
+      currentPage: newPage
+    })
   };
 
   return (
