@@ -6,6 +6,7 @@ import axios from 'axios';
 import Nav from './components/Nav';
 import Stats from './components/Stats';
 import Settings from './components/Settings';
+import Pagination from './components/Pagination';
 
 // helpers
 import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
@@ -28,8 +29,18 @@ export type Data = {
   total: number,
 };
 
+export type PageData = {
+  currentPage: number
+};
+
 const App = () => {
   const [listings, setListings] = useState<Listings[]>([]);
+  const [pageData, setPageData] = useState<PageData>({
+    currentPage: 1,
+  });
+
+  const [currentPageData, setCurrentPageData] = useState<Listings[]>([]);
+  const pageSize = 15;
 
   useEffect(() => {
     axios.get("/api/listings")
@@ -61,6 +72,20 @@ const App = () => {
     return { median: finalMedian, total };
   }, [listings.length]);
 
+  useEffect(() => {
+    const end = pageSize * pageData.currentPage;
+    const start = end - pageSize;
+    const pageDataView = listings.slice(start, end);
+    setCurrentPageData([...pageDataView]);
+  }, [pageData.currentPage])
+
+  const updatePage = (newPage: number) => {
+    setPageData(prev => ({
+      ...prev,
+      currentPage: newPage,
+    }))
+  };
+
   return (
     <BrowserRouter>
       <Nav />
@@ -70,7 +95,13 @@ const App = () => {
           <Route path="/" element={
             <>
               <Stats listingsData={listingsData} />
-              <Table listings={listings} listingsData={listingsData}/>
+              <Pagination 
+                onPageChange={updatePage}
+                currentPage={pageData.currentPage}
+                totalListings={listings.length}
+                pageSize={pageSize}
+              />
+              <Table listings={currentPageData} listingsData={listingsData}/>
             </>
           }/>
 

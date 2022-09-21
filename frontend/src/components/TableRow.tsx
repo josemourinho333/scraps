@@ -36,14 +36,14 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
 
       <td className='price'>${price}</td>
       <td className='title-condition'>
-        <div className="w-[300px]">
+        <div className="w-[200px]">
           {title.substring(0, 30)}
           <br/>
           <span className="badge badge-ghost badge-sm condition">Condition: {condition}</span>
         </div>
       </td>
       <td className='desc'>
-        {desc.substring(0, 60)}
+        {desc.substring(0, 75)}
       </td>
       <td className="location">
         <div className="w-[100px]">{formatLocation(location).substring(0, 10)}...</div>
