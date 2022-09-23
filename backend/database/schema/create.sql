@@ -11,7 +11,8 @@ CREATE TABLE listings (
   condition TEXT,
   price INTEGER NOT NULL,
   date TEXT NOT NULL,
-  location TEXT NOT NULL
+  location TEXT NOT NULL,
+  blacklisted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE unwanted (
