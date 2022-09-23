@@ -12,8 +12,18 @@ const settingsRoute = require('./routes/settings');
 const port = process.env.PORT || 8080;
 const app = express();
 
+// cors config
+const corsOptions = {
+  origin: 'http://localhost:3000/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  preflightContinue: false,
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
 // middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
