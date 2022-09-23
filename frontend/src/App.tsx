@@ -10,6 +10,7 @@ import Pagination from './components/Pagination';
 
 // helpers
 import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
+import ListingPage from './components/ListingPage';
 
 export type Listings = {
   id: number,
@@ -85,6 +86,16 @@ const App = () => {
     })
   };
 
+  const deleteListing = (id: number) => {
+    axios.patch(`/api/listings/${id}`)
+      .then((res) => {
+        const blackedListedId = res.data[0].id;
+        const updatedListings = listings.filter((listing) => listing.id !== blackedListedId);
+        setListings(updatedListings);
+      })
+      .catch((err) => console.log('err', err));
+  };
+
   return (
     <BrowserRouter>
       <Nav />
@@ -100,13 +111,15 @@ const App = () => {
                 totalListings={listings.length}
                 pageSize={pageSize}
               />
-              <Table listings={currentPageData} listingsData={listingsData}/>
+              <Table listings={currentPageData} listingsData={listingsData} deleteListing={deleteListing}/>
             </>
           }/>
 
-          {/* <Route path="/new" element={
-            <>"Adding page"</>
-          } /> */}
+          <Route path="/listings/:id" element={
+            <ListingPage 
+              listings={listings}
+            />
+          } />
 
           <Route path="/logs" element={
             <>"Logs"</>

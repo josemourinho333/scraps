@@ -12,7 +12,6 @@ const TableColumns = () => {
       <th className='bg-primary text-primary-content'>Specs</th>
       <th className='bg-primary text-primary-content'>Location</th>
       <th className='bg-primary text-primary-content'>Analysis</th>
-      <th className='bg-primary text-primary-content'>Link</th>
       <th className='bg-primary text-primary-content'>Date</th>
       <th className='bg-primary text-primary-content'></th>
     </tr>

@@ -6,9 +6,10 @@ import { Listings, Data } from '../App';
 type Props = {
   listings: Listings[],
   listingsData: Data,
+  deleteListing: (id: number) => void,
 };
 
-const Table = ({listings, listingsData}: Props) => {
+const Table = ({listings, listingsData, deleteListing}: Props) => {
   // map over listings and generate tablerow
   const rows = listings.map((listing) => {
     return (
@@ -25,6 +26,7 @@ const Table = ({listings, listingsData}: Props) => {
         location={listing.location}
         link={listing.link}
         median={listingsData.median}
+        deleteListing={deleteListing}
       />
     )
   })
