@@ -34,7 +34,7 @@ const Pagination = ({onPageChange, currentPage, totalListings, pageSize}: Props)
       {pageRange?.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
           return (
-            <button className="btn btn-disabled">{DOTS}</button>
+            <button key={index} className="btn btn-disabled">{DOTS}</button>
           );
         }
 
