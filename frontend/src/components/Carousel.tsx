@@ -9,7 +9,7 @@ const Carousel = ({images}: Props) => {
   const imgs = images.map((img, index) => {
     const current = index + 1;
     return (
-      <div key={current} id={`slide${current}`} className="carousel-item relative w-full">
+      <div key={current} id={`slide${current}`} className="carousel-item relative w-full justify-center">
         <img src={img} alt="carousel" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
           <a 

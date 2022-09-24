@@ -23,7 +23,7 @@ const ListingPage = ({listings}: Props) => {
   }
 
   return (
-    <div className="card w-5/12 bg-base-100 shadow-2xl my-5">
+    <div className="card bg-base-100 shadow-2xl my-5">
       <figure>
         <Carousel images={listing.images} />
       </figure>
