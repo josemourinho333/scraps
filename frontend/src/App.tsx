@@ -96,10 +96,6 @@ const App = () => {
       .catch((err) => console.log('err', err));
   };
 
-  const unwantedContent = () => {
-    console.log('post request sent for:')
-  };
-
   return (
     <BrowserRouter>
       <Nav />

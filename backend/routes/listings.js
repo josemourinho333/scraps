@@ -47,6 +47,6 @@ module.exports = db => {
       })
       .catch((err) => console.log('err', err));
   });
-
+  
   return router;
 };
