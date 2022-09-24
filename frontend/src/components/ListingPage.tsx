@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Listings } from '../App';
 import { useParams } from 'react-router-dom';
 import Carousel from './Carousel';
+import Settings from './Settings';
 
 type Props = {
   listings: Listings[];
@@ -23,7 +24,8 @@ const ListingPage = ({listings}: Props) => {
   }
 
   return (
-    <div className="card w-2/3 bg-base-100 shadow-2xl my-5">
+    <div className='flex justify-center'>
+    <div className="card w-1/3 bg-base-100 shadow-2xl my-5">
       <figure>
         <Carousel images={listing.images} />
       </figure>
@@ -72,6 +74,8 @@ const ListingPage = ({listings}: Props) => {
           </button>
         </div>
       </div>
+    </div>
+    <Settings />
     </div>
   )
 }
