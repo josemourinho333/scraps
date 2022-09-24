@@ -1,11 +1,11 @@
 import React from 'react';
 import TableRow from './TableRow';
 import TableColumns from './TableColumns';
-import { Listings, Data } from '../App';
+import { Listings } from '../App';
 
 type Props = {
   listings: Listings[],
-  listingsData: Data,
+  listingsData: any,
   deleteListing: (id: number) => void,
 };
 

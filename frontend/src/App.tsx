@@ -9,7 +9,7 @@ import Settings from './components/Settings';
 import Pagination from './components/Pagination';
 
 // helpers
-import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
+import { formatDesc, formatTitle } from './helpers/helpers';
 import ListingPage from './components/ListingPage';
 
 export type Listings = {
@@ -25,11 +25,6 @@ export type Listings = {
   link: string,
 };
 
-export type Data = {
-  median: number | string,
-  total: number,
-};
-
 export type PageData = {
   currentPage: number
 };
@@ -43,6 +38,7 @@ const App = () => {
   const [currentPageData, setCurrentPageData] = useState<Listings[]>([]);
   const pageSize = 15;
 
+  // fetching listings
   useEffect(() => {
     axios.get("/api/listings")
       .then((res) => {
@@ -63,29 +59,38 @@ const App = () => {
       .catch((err) => console.log('fetching listings err', err));
   }, []);
 
-  const listingsData: Data = useMemo(() => {
-    const prices = listings.map((listing) => {
-      return listing.price;
-    });
-    const medianValue = getMedian(prices);
-    const finalMedian = Number(medianValue).toFixed(2);
-    const total = listings.length;
-    return { median: finalMedian, total };
-  }, [listings]);
-
+  // render page view 
   useEffect(() => {
     const end = pageSize * pageData.currentPage;
     const start = end - pageSize;
     const pageDataView = listings.slice(start, end);
     setCurrentPageData([...pageDataView]);
-  }, [pageData.currentPage, listings])
+  }, [pageData.currentPage, listings]);
 
+  // get listings data
+  const listingsData = useMemo(() => {
+    const data: any = {};
+    for (const listing of listings) {
+      const model = listing.title.toLowerCase().split(' ').join('');
+      if (data[model]) {
+        data[model].push(listing.price);
+      } else {
+        data[model] = [listing.price];
+      }
+    };
+
+    return data;
+  }, [listings]);
+
+  // navigate between pages
   const updatePage = (newPage: number) => {
     setPageData({
       currentPage: newPage
     })
   };
 
+
+  // blacklist a listing
   const deleteListing = (id: number) => {
     axios.patch(`/api/listings/${id}`)
       .then((res) => {
@@ -104,7 +109,7 @@ const App = () => {
 
           <Route path="/" element={
             <>
-              <Stats listingsData={listingsData} />
+              <Stats listingsData={listingsData} total={listings.length} />
               <Pagination 
                 onPageChange={updatePage}
                 currentPage={pageData.currentPage}
