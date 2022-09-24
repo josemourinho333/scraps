@@ -23,14 +23,48 @@ const ListingPage = ({listings}: Props) => {
   }
 
   return (
-    <div className="card bg-base-100 shadow-2xl my-5">
+    <div className="card w-2/3 bg-base-100 shadow-2xl my-5">
       <figure>
         <Carousel images={listing.images} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="card-actions justify-end">
+        <div className="alert alert-primary shadow-lg my-1">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>{listing.date} | {listing.id} / {listing.craigslistid}</span>
+            </div>
+        </div>
+        <div className="alert alert-primary shadow-lg my-1">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{listing.title}</span>
+          </div>
+        </div>
+        <div className="alert alert-primary shadow-lg my-1">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>${listing.price}</span>
+          </div>
+        </div>
+        <div className="alert alert-primary shadow-lg my-1">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{listing.condition ? listing.condition : 'No condition listed'}</span>
+          </div>
+        </div>
+        <div className="alert alert-primary shadow-lg my-1">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{listing.desc}</span>
+          </div>
+        </div>
+        <div className="alert alert-primary shadow-lg my-1">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{listing.location}</span>
+          </div>
+        </div>
+        <div className="card-actions justify-end my-1">
           <button className="btn btn-primary">
             <a href={listing.link} target="_blank" rel="noopener noreferrer">
               Go to listing
