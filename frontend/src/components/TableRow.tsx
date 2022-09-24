@@ -1,5 +1,6 @@
 import { LinkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { formatLocation, formatDate, analyzePrice } from '../helpers/helpers';
+import { Link } from 'react-router-dom';
 
 type Props = {
   id: number,
@@ -13,9 +14,10 @@ type Props = {
   location: string, 
   link: string, 
   median: number | string,
+  deleteListing: (id: number) => void,
 };
 
-const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, median}: Props) => {
+const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, median, deleteListing}: Props) => {
 
   const analysisResult = analyzePrice(price, median);
 
@@ -62,9 +64,6 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
           : 'N/A'
         }
       </td>
-      <td className="link">
-        <a href={link} target="_blank" rel="noopener noreferrer"><LinkIcon className='h-4 w-4 text-primary'/></a>
-      </td>
       <td className="date">
         <div className='w-[100px]'>
           <div className="font-regular">{formatDate(date)[0]}</div>
@@ -77,8 +76,15 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
             <EllipsisVerticalIcon className='h-4 w-4 text-primary'/>
           </label>
           <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
+            <li><Link to={`/listings/${id}`}>More Details</Link></li>
+            <li>
+              <button 
+                className="btn-sm btn-ghost"
+                onClick={() => deleteListing(id)}
+                >
+                Delete
+              </button>
+            </li>
           </ul>
         </div>
       </td>

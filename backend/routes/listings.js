@@ -16,6 +16,7 @@ module.exports = db => {
         link
       FROM listings
       JOIN images ON images.listing_id = listings.id
+      WHERE listings.blacklisted = false
       GROUP BY listings.id
       ORDER BY date desc;
     `;
@@ -25,6 +26,26 @@ module.exports = db => {
         res.json(listings);
       })
       .catch((err) => console.log('get listings err', err));
+  });
+
+  router.patch('/listings/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `
+      UPDATE
+        listings
+      SET
+        blacklisted = true
+      WHERE
+        id = $1
+      RETURNING
+        id;
+    `;
+
+    return db.query(query, [id])
+      .then(({ rows: id }) => {
+        res.json(id);
+      })
+      .catch((err) => console.log('err', err));
   });
 
   return router;
