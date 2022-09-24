@@ -1,4 +1,4 @@
-import { LinkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { formatLocation, formatDate, analyzePrice } from '../helpers/helpers';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ type Props = {
   deleteListing: (id: number) => void,
 };
 
-const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, link, median, deleteListing}: Props) => {
+const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, median, deleteListing}: Props) => {
 
   const analysisResult = analyzePrice(price, median);
 
