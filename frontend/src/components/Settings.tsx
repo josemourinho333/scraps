@@ -4,11 +4,24 @@ import SettingCard from './SettingCard';
 
 export type Setting = {
   years: string[],
-  words: string[],
+  keywords: string[],
 };
 
 const Settings = () => {
-  const [settings, setSettings] = useState<Setting>({years: [], words: []});
+  const [settings, setSettings] = useState<Setting>({years: [], keywords: []});
+
+  const unwantedContent = (category: string, value: string) => {
+    setSettings(prev => ({
+      ...prev,
+      [category]: [...settings[category as keyof Setting], value]
+    }));
+
+    axios.post('/api/settings/new', { category, value })
+      .then((res) => {
+        console.log('res from post', res);
+      })
+      .catch((err) => console.log('err', err));
+  };
 
   useEffect(() => {
     axios.get("/api/settings")
@@ -24,6 +37,7 @@ const Settings = () => {
         key={index}
         title={setting}
         values={settings[setting as keyof Setting]}
+        unwantedContent={unwantedContent}
       />
     )
   });
