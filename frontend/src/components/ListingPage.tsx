@@ -6,9 +6,10 @@ import Settings from './Settings';
 
 type Props = {
   listings: Listings[];
+  editModel: (id: number, e: any) => void;
 };
 
-const ListingPage = ({listings}: Props) => {
+const ListingPage = ({listings, editModel}: Props) => {
   const { id } = useParams() as any;
   const [listing, setListing] = useState<any>(null);
 
@@ -39,7 +40,19 @@ const ListingPage = ({listings}: Props) => {
         <div className="alert alert-primary shadow-lg my-1">
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>{listing.title}</span>
+            <div><span>{listing.title}</span></div>
+
+            <div className='flex flex-col'>
+              <div className='text-xs m-1'>Quick update model</div>
+              <div className="flex">
+                <button 
+                  onClick={(e) => editModel(id, e)}
+                  className="btn btn-xs btn-primary mx-1 text-xs">macbook air</button>
+                <button 
+                  onClick={(e) => editModel(id, e)}
+                  className="btn btn-xs btn-primary mx-1 text-xs">macbook pro</button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="alert alert-primary shadow-lg my-1">
