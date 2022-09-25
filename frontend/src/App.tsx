@@ -9,7 +9,7 @@ import Settings from './components/Settings';
 import Pagination from './components/Pagination';
 
 // helpers
-import { formatDesc, formatTitle } from './helpers/helpers';
+import { formatDesc, formatTitle, getMedian } from './helpers/helpers';
 import ListingPage from './components/ListingPage';
 
 export type Listings = {
@@ -79,6 +79,11 @@ const App = () => {
       }
     };
 
+    const keys = Object.keys(data);
+    for (const key of keys) {
+      data[key] = getMedian(data[key]);
+    };
+
     return data;
   }, [listings]);
 
@@ -88,7 +93,6 @@ const App = () => {
       currentPage: newPage
     })
   };
-
 
   // blacklist a listing
   const deleteListing = (id: number) => {

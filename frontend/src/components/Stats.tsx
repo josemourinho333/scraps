@@ -11,7 +11,7 @@ const Stats = ({listingsData, total}: Props) => {
     return (
       <div key={index} className="stat bg-primary text-primary-content border border-base-300">
         <div className="stat-title">{data}</div>
-        <div className="stat-value">${getMedian(listingsData[data])}</div>
+        <div className="stat-value">${listingsData[data]}</div>
         <div className="stat-desc">Median Price</div>
       </div>
     )
