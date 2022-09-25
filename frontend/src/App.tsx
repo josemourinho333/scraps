@@ -101,6 +101,22 @@ const App = () => {
       .catch((err) => console.log('err', err));
   };
 
+  // quick fix title
+  const editModel = (id: number, e: any) => {
+    const target = e.target as HTMLButtonElement;
+    const model = target.textContent;
+    const listing = listings.filter((data) => data.id === Number(id))[0];
+    listing.title = model as string;
+
+    const allListings = [...listings.filter((data) => data.id !== Number(id)), listing];
+    setListings(allListings);
+    axios.patch(`/api/listings/edit/${id}`, {model})
+      .then((res) => {
+        console.log('res', res);
+      })
+      .catch((err) => console.log('err', err));
+  };
+
   return (
     <BrowserRouter>
       <Nav />
@@ -123,6 +139,7 @@ const App = () => {
           <Route path="/listings/:id" element={
             <ListingPage 
               listings={listings}
+              editModel={editModel}
             />
           } />
 

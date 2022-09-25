@@ -47,6 +47,27 @@ module.exports = db => {
       })
       .catch((err) => console.log('err', err));
   });
+
+  router.patch('/listings/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const model = req.body.model;
+    const query = `
+      UPDATE
+        listings
+      SET
+        title = $2
+      WHERE
+        id = $1
+      RETURNING
+        id;
+    `;
+    
+    return db.query(query, [id, model])
+      .then(({ rows: id }) => {
+        res.json(id);
+      })
+      .catch((err) => console.log('err', err));
+  });
   
   return router;
 };
