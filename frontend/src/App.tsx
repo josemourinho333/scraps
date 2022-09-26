@@ -121,6 +121,16 @@ const App = () => {
       .catch((err) => console.log('err', err));
   };
 
+  // update median values
+  const updateMedian = () => {
+    console.log('uhhh');
+    axios.patch('/api/median', listingsData)
+      .then((res) => {
+        console.log('Success', res.status);
+      })
+      .catch((err) => console.log('err', err));
+  };
+
   return (
     <BrowserRouter>
       <Nav />
@@ -129,7 +139,8 @@ const App = () => {
 
           <Route path="/" element={
             <>
-              <Stats listingsData={listingsData} total={listings.length} />
+              <Stats listingsData={listingsData} total={listings.length} 
+              updateMedian={updateMedian} />
               <Pagination 
                 onPageChange={updatePage}
                 currentPage={pageData.currentPage}
