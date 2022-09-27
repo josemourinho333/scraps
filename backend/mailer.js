@@ -53,7 +53,10 @@ const notifyMe = (db) => {
       });
     }
 
-    sendEmail();
+    if (results.rows.length > 0) {
+      sendEmail();
+    }
+    
   })
   .catch((err) => console.log('err', err));
 };
