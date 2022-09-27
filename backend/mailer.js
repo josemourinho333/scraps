@@ -22,19 +22,21 @@ const notifyMe = (db) => {
   // use that to join median table 
   // use respective median values to decide to send email or not
   // email should be formmated with date - title - link - price
-  // db.query(`
-  //   SELECT link 
-  //   FROM listings
-  //   JOIN median ON median.model = listings.model;
-  //   WHERE
-  //     blacklisted = true
-  //   AND
-  //     price < median.median_value - 150
-  // `)
-  // .then((results) => {
-  //   console.log('results', results);
-  // })
-  // .catch((err) => console.log('err', err));
+  db.query(`
+    SELECT link, price, median.median_value, date, title, listings.model
+    FROM listings
+    JOIN median ON median.model = listings.model
+    WHERE
+      blacklisted = false
+    AND
+      price < median.median_value - 150
+    AND
+      price > 800;
+  `)
+  .then((results) => {
+    console.log('results', results.rows);
+  })
+  .catch((err) => console.log('err', err));
 };
 
 // transporter.sendMail(mailOptions, (error, info) => {
