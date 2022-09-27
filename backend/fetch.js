@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 const formatTitle = require('./formatTitle');
+const notifyMe = require('./mailer');
 
 const scrapeData = (db) => {
   axios.get(process.env.CRAIGSLIST_URL)
@@ -32,6 +33,8 @@ const scrapeData = (db) => {
       db.query(`SELECT craigslist_id FROM listings;`).then(({ rows: results}) => {
         // get all craiglist ids that's already in DB.
         const listingIds = results.map((result) => Number(result.craigslist_id));
+
+        const newItems = [];
         // grab the html fetched and loop over each listings currently on CL.
         $('.result-row', html).each(function(index) {
           const currentElement = $(this);
@@ -76,6 +79,7 @@ const scrapeData = (db) => {
                       model
                     };
 
+                    newItems.push(item);
                     return item;
                   })
                   .then((item) => {
@@ -105,12 +109,16 @@ const scrapeData = (db) => {
                         )
                       });
 
-                      Promise.all(promises).then(() => {
-                        console.log('imgs success');
-                      })
-                      .catch((err) => console.log('imgs err', err));
-
+                      Promise.all(promises)
+                        .then(() => {
+                          console.log('imgs success');
+                        })
+                        .catch((err) => console.log('imgs err', err));
                     })
+                  })
+                  .then((newItems) => {
+                    console.log('notfiying if applicable, data scraping is done...')
+                    notifyMe(newItems);
                   })
                   .catch((err) => console.log('indiv page err', err));
                 }, index * 1000);

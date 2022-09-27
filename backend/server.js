@@ -5,7 +5,6 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const db = require('./database/database');
 const scrapeData = require('./fetch');
-const notifyMe = require('./mailer');
 
 const listingRoute = require('./routes/listings');
 const settingsRoute = require('./routes/settings');
@@ -41,6 +40,5 @@ app.use('/api', medianRoute(db));
 
 // scraping data
 scrapeData(db);
-notifyMe(db);
 
 app.listen(port, () => console.log(`Server running on ${port}`));
