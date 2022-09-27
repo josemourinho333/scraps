@@ -1,0 +1,21 @@
+<ul>
+  <% deals.forEach(function(deal) { %>
+    <li>
+      <a href="<%= deal.link %>" target="_blank" rel="noopener noreferrer">
+        <%= deal.title %>
+      </a>
+      <div>
+        <%= deal.model %>
+      </div>
+      <div>
+        <%= deal.price %>
+      </div>
+      <div>
+        <%= deal.median_value %>
+      </div>
+      <div>
+        <%= deal.date %>
+      </div>
+    </li>
+  <% }) %>
+</ul>
