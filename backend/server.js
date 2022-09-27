@@ -5,6 +5,7 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const db = require('./database/database');
 const scrapeData = require('./fetch');
+const notifyMe = require('./mailer');
 
 const listingRoute = require('./routes/listings');
 const settingsRoute = require('./routes/settings');
@@ -15,7 +16,8 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 // mailer
-const cp = require('child_process');
+// const cp = require('child_process');
+// cp.fork(__dirname + '/mailer.js');
 
 // cors config
 const corsOptions = {
@@ -39,8 +41,6 @@ app.use('/api', medianRoute(db));
 
 // scraping data
 scrapeData(db);
-
-// cp.fork(__dirname + '/mailer.js');
-
+notifyMe(db);
 
 app.listen(port, () => console.log(`Server running on ${port}`));

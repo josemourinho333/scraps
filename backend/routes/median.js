@@ -2,9 +2,8 @@ const router = require('express').Router();
 
 module.exports = db => {
   router.patch('/median', (req, res) => {
-    const macbookAirValue = req.body.macbookair;
-    const macbookProValue = req.body.macbookpro;
-    console.log('in server', macbookAirValue, macbookProValue);
+    const macbookAirValue = req.body["macbook air"];
+    const macbookProValue = req.body["macbook pro"];
 
     const query = `
       UPDATE median SET
@@ -13,7 +12,7 @@ module.exports = db => {
       RETURNING *;
     `;
 
-    return db.query(query, ["macbookair", macbookAirValue, "macbookpro", macbookProValue])
+    return db.query(query, ["macbook air", macbookAirValue, "macbook pro", macbookProValue])
       .then(({rows: updatedMedian}) => {
         res.json(updatedMedian);
       })

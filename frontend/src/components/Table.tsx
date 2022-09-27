@@ -13,8 +13,6 @@ const Table = ({listings, listingsData, deleteListing}: Props) => {
   // map over listings and generate tablerow
   const rows = listings.map((listing) => {
 
-    const model = listing.title.split(' ').join('');
-
     return (
       <TableRow 
         key={listing.id}
@@ -28,8 +26,9 @@ const Table = ({listings, listingsData, deleteListing}: Props) => {
         condition={listing.condition}
         location={listing.location}
         link={listing.link}
-        median={listingsData[model]}
+        median={listingsData[listing.model]}
         deleteListing={deleteListing}
+        model={listing.model}
       />
     )
   })

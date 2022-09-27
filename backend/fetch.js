@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
+const formatTitle = require('./formatTitle');
 
 const scrapeData = (db) => {
   axios.get(process.env.CRAIGSLIST_URL)
@@ -38,10 +39,11 @@ const scrapeData = (db) => {
         
           if (!listingIds.includes(craigslistId)) {
             const title = currentElement.find('.result-title').text().toLowerCase();
+            const model = formatTitle(title);
             const condition = (element) => title.includes(element);
             const price = Number(currentElement.children('.result-info').find('.result-price').text().slice(1).split('').filter((char) => char !== ',').join(''));
 
-            if (price >= 500) {
+            if (price >= 650) {
               // need to make db query to grab unwanted stuff to use below
               if (!unwanted.years.some(condition) && !unwanted.keywords.some(condition)) {
                 const images = !currentElement.find('.result-image').attr('data-ids')
@@ -70,19 +72,20 @@ const scrapeData = (db) => {
                       price,
                       condition,
                       location,
-                      images
+                      images,
+                      model
                     };
 
                     return item;
                   })
                   .then((item) => {
                     // need to update table with make, model and size
-                    const vals = [item.craigslistId, item.link, item.title, item.desc, item.condition, item.price, item.date, item.location];
+                    const vals = [item.craigslistId, item.link, item.title, item.desc, item.condition, item.price, item.date, item.location, item.model];
                     db.query(`
                       INSERT INTO listings 
-                        (craigslist_id, link, title, description, condition, price, date, location) 
+                        (craigslist_id, link, title, description, condition, price, date, location, model) 
                       VALUES
-                        ($1, $2, $3, $4, $5, $6, $7, $8)
+                        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                       RETURNING *;`
                     , vals)
                     .then((addedItem) => {

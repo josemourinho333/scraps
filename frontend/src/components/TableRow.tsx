@@ -15,9 +15,10 @@ type Props = {
   link: string, 
   median: number | string,
   deleteListing: (id: number) => void,
+  model: string,
 };
 
-const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, median, deleteListing}: Props) => {
+const TableRow = ({id, craigslistId, images, date, price, title, desc, condition, location, median, deleteListing, model}: Props) => {
 
   const analysisResult = analyzePrice(price, median);
 
@@ -39,7 +40,7 @@ const TableRow = ({id, craigslistId, images, date, price, title, desc, condition
       <td className='price'>${price}</td>
       <td className='title-condition'>
         <div className="w-[200px]">
-          {title.substring(0, 30)}
+          {model}
           <br/>
           <span className="badge badge-ghost badge-sm condition">Condition: {condition}</span>
         </div>

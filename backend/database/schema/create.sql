@@ -12,7 +12,8 @@ CREATE TABLE listings (
   price INTEGER NOT NULL,
   date TEXT NOT NULL,
   location TEXT NOT NULL,
-  blacklisted BOOLEAN NOT NULL DEFAULT FALSE
+  blacklisted BOOLEAN NOT NULL DEFAULT FALSE,
+  model TEXT NOT NULL DEFAULT 'NA'
 );
 
 CREATE TABLE unwanted (

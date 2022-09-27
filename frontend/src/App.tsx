@@ -23,6 +23,7 @@ export type Listings = {
   condition: string,
   location: string,
   link: string,
+  model: string,
 };
 
 export type PageData = {
@@ -71,7 +72,7 @@ const App = () => {
   const listingsData = useMemo(() => {
     const data: any = {};
     for (const listing of listings) {
-      const model = listing.title.toLowerCase().split(' ').join('');
+      const model = listing.model;
       if (data[model]) {
         data[model].push(listing.price);
       } else {
@@ -123,7 +124,7 @@ const App = () => {
 
   // update median values
   const updateMedian = () => {
-    console.log('uhhh');
+    console.log('uhhh', listingsData);
     axios.patch('/api/median', listingsData)
       .then((res) => {
         console.log('Success', res.status);

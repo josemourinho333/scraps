@@ -16,10 +16,33 @@ const mailOptions = {
   text: 'That was easy peassy'
 };
 
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent:', info.response);
-  }
-});
+const notifyMe = (db) => {
+  // grab all listings (date, title and link)
+  // format the title like formatTitle
+  // use that to join median table 
+  // use respective median values to decide to send email or not
+  // email should be formmated with date - title - link - price
+  // db.query(`
+  //   SELECT link 
+  //   FROM listings
+  //   JOIN median ON median.model = listings.model;
+  //   WHERE
+  //     blacklisted = true
+  //   AND
+  //     price < median.median_value - 150
+  // `)
+  // .then((results) => {
+  //   console.log('results', results);
+  // })
+  // .catch((err) => console.log('err', err));
+};
+
+// transporter.sendMail(mailOptions, (error, info) => {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent:', info.response);
+//   }
+// });
+
+module.exports = notifyMe;

@@ -1,4 +1,4 @@
 INSERT INTO median (model, median_value)
 VALUES
-  ('macbookair', 1000),
-  ('macbookpro', 1450);
+  ('macbook air', 1000),
+  ('macbook pro', 1450);

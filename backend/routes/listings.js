@@ -13,7 +13,8 @@ module.exports = db => {
         description AS desc,
         condition,
         location,
-        link
+        link,
+        model
       FROM listings
       JOIN images ON images.listing_id = listings.id
       WHERE listings.blacklisted = false
@@ -55,7 +56,7 @@ module.exports = db => {
       UPDATE
         listings
       SET
-        title = $2
+        model = $2
       WHERE
         id = $1
       RETURNING

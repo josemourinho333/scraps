@@ -7,6 +7,10 @@ function usePagination(currentPage: number, totalListings: number, pageSize: num
     return [currentPage];
   };
 
+  if (totalPagesRequired === 2) {
+    return [1, 2];
+  }
+
   if (currentPage === 1) {
     return [currentPage, currentPage + 1, currentPage + 2, DOTS, totalPagesRequired];
   };
