@@ -1,5 +1,7 @@
 require('dotenv').config();
+const path = require('path');
 const nodemailer = require('nodemailer');
+const ejs = require('ejs');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -8,13 +10,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.GMAIL_PASS,
   },
 });
-
-const mailOptions = {
-  from: 'yoo.phil92@gmail.com',
-  to: 'yoo.phil92@gmail.com',
-  subject: 'Testing NodeMailer',
-  text: 'That was easy peassy'
-};
 
 const notifyMe = (db) => {
   // grab all listings (date, title and link)
@@ -35,16 +30,32 @@ const notifyMe = (db) => {
   `)
   .then((results) => {
     console.log('results', results.rows);
+    const templateVars = { deals: results.rows };
+
+    const sendEmail = async() => {
+      const templatePath = path.join(__dirname + "/views/mail_deal.ejs");
+      const mailHTML = await ejs.renderFile(templatePath, templateVars);
+
+      const mailOptions = {
+        from: 'yoo.phil92@gmail.com',
+        to: 'yoo.phil92@gmail.com',
+        subject: 'Scraper Alert',
+        html: mailHTML,
+      };
+
+
+      await transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+    }
+
+    sendEmail();
   })
   .catch((err) => console.log('err', err));
 };
-
-// transporter.sendMail(mailOptions, (error, info) => {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent:', info.response);
-//   }
-// });
 
 module.exports = notifyMe;
