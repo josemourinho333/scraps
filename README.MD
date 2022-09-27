@@ -4,6 +4,11 @@ Full stack app that will scrape Craigslist searching for Macbooks. The applicati
 
 Purpose for this app was to practice TypeScript, get more comfortable with building a full stack application and get familiar with setting up cronjob while creating a potential for me to snag a Macbook for myself or for me to resell for profit.
 
+![UI](https://github.com/josemourinho333/scraps/blob/master/docs/scraper-ui.PNG?raw=true)
+![alert](https://github.com/josemourinho333/scraps/blob/master/docs/scraper-alert.PNG?raw=true)
+![listing](https://github.com/josemourinho333/scraps/blob/master/docs/scraper-listing.PNG?raw=true)
+![settings](https://github.com/josemourinho333/scraps/blob/master/docs/scraper-settings.PNG?raw=true)
+
 ## Tech in use
 
 * TypeScript
